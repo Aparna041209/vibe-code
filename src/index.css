@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@theme inline {
+    --font-heading: 'Press Start 2P', cursive;
+    --font-sans: 'VT323', monospace;
+    --color-neon-pink: #ff00ff;
+    --color-neon-blue: #00ffff;
+    --color-neon-green: #39ff14;
+    --color-neon-purple: #bc13fe;
+    
+    --color-magenta: #ff00ff;
+    --color-cyan: #00ffff;
+    
+    --color-background: #000000;
+    --color-foreground: #00ffff;
+}
+
+:root {
+    --background: #000000;
+    --foreground: #00ffff;
+    --card: #050505;
+    --card-foreground: #ff00ff;
+    --primary: #00ffff;
+    --primary-foreground: #000000;
+    --secondary: #ff00ff;
+    --secondary-foreground: #ffffff;
+    --muted: #111111;
+    --muted-foreground: #00ffff;
+    --accent: #ff00ff;
+    --accent-foreground: #000000;
+    --destructive: #ff0000;
+    --border: #00ffff;
+    --input: #00ffff;
+    --ring: #ff00ff;
+    --radius: 0px;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes noise {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 100%; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.glitch-text {
+  animation: glitch 0.2s infinite;
+  text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff;
+}
+
+.noise-bg {
+  position: relative;
+}
+
+.noise-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(0, 255, 255, 0.1);
+  z-index: 100;
+  pointer-events: none;
+  animation: scanline 4s linear infinite;
+}
+
+@layer base {
+  * {
+    @apply border-cyan/20 outline-magenta/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    font-smooth: never;
+    -webkit-font-smoothing: none;
+    }
+  html {
+    @apply font-sans;
+    }
+}
